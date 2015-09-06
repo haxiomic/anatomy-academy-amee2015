@@ -1,4 +1,6 @@
 /* Utils */
+var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
+
 function trace(){console.log.apply(console, arguments);}
 
 function loadJSON(path, success, error){

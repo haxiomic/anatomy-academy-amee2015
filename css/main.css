@@ -132,7 +132,10 @@ button {
     padding: 30px;
     right: 0px;
     bottom: 0px;
-    opacity: 0.5; }
+    opacity: 0.5;
+    text-align: right; }
+    .viewer .quick-tip div:not(:last-child) {
+      margin-bottom: 17.5px; }
 
 .uilayer.annotation {
   padding: 10px 15px;

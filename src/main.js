@@ -25,6 +25,11 @@ var uiManager = (function(){
         uiContainer.style.left = 0+'px';
         uiContainer.style.top = 0+'px';
         insertAfter(uiContainer, canvas);
+
+        //replace undo keys string for windows
+        if(!isMac){
+            document.querySelector('#undo-cmd-str').innerHTML = "CTRL-Z";
+        }
     }
 
     function update(){
@@ -184,7 +189,6 @@ var app = (function(){
     }
     //app state
     var _interactionMode;
-    var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
     var mouseDown = false;
     var shiftDown = false;
     var altDown = false;
