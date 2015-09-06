@@ -12,10 +12,17 @@ question
 
 	cameraPos:Vec3
 	cameraTarget:Vec3
+
 	annotations:[
 		{
 			text:String
 			point:Vec3
+		}
+	]
+
+	lines: [
+		{
+			points: [Vec3]
 		}
 	]
 
@@ -31,3 +38,5 @@ question
 	}
 
 
+	next:String
+	previous:String

@@ -196,8 +196,9 @@ var app = (function(){
     var cmdDown = false;
     var line3DColor = 0x0000FF;
     var line3DThickness = 0.1;
+    var line3DOpacity = 1.0;
     //typedef LinePart = {point:Vector3, objects:Array<Object3D>};
-    var lines = [];//:Array<LinePart>
+    var lines = [];//:Array<Array<LinePart>>
     var currentLine = null;//:LinePart
     var questionType = null;
 
@@ -291,9 +292,29 @@ var app = (function(){
     function setState(state){
         uiManager.setQuestion(state);
 
-        //set question state
-        //load models
+        //state variables
+        line3DColor = state.lineColor || line3DColor;
+        line3DThickness = state.lineThickness || line3DThickness;
 
+        //interaction mode
+        switch(state.type){
+            case "poll":
+                setInteractionMode(INTERACTION_MODE.orbit);
+            break;
+            case "label":
+                setInteractionMode(INTERACTION_MODE.orbit);
+            break;
+            case "draw":
+                setInteractionMode(INTERACTION_MODE.draw);
+            break;
+            default:
+                setInteractionMode(INTERACTION_MODE.orbit);
+            break;
+        }
+
+        questionType = state.type;
+
+        //load models
         for(var i = 0; i < state.models.length; i++){
             var m = state.models[i];
 
@@ -342,20 +363,41 @@ var app = (function(){
         }
 
         //add annotations
-        for(var i = 0; i < state.annotations.length; i++){
-            var a = state.annotations[i];
-            var annote = annotate3D(new THREE.Vector3(a.point[0], a.point[1], a.point[2]), a.text, a.width, a.editable);
+        if(state.annotations){
+            for(var i = 0; i < state.annotations.length; i++){
+                var a = state.annotations[i];
+                var annote = annotate3D(new THREE.Vector3(a.point[0], a.point[1], a.point[2]), a.text, a.width, a.editable);
 
-            //fix interaction on edit
-            //save restore interaction mode
-            var _savedInteractionMode = getInteractionMode();
-            annote.pane.el.addEventListener('focus', function(){
-                _savedInteractionMode = getInteractionMode();
-                setInteractionMode(INTERACTION_MODE.fixed);
-            });
-            annote.pane.el.addEventListener('blur', function(){
-                setInteractionMode(_savedInteractionMode);
-            });
+                //fix interaction on edit
+                //save restore interaction mode
+                var _savedInteractionMode = getInteractionMode();
+                annote.pane.el.addEventListener('focus', function(){
+                    _savedInteractionMode = getInteractionMode();
+                    setInteractionMode(INTERACTION_MODE.fixed);
+                });
+                annote.pane.el.addEventListener('blur', function(){
+                    setInteractionMode(_savedInteractionMode);
+                });
+            }
+        }
+
+        //add lines
+        if(state.lines){//array of arrays of Vec3
+            for(var i = 0; i < state.lines.length; i++){
+                var l = state.lines[i];
+                //iterate line points
+                if(!l.points[0]) continue;
+                line3DColor = l.color;
+                line3DOpacity = l.opacity;
+                line3DThickness = 0.03;//l.thickness;//@! hack
+                var p;
+                p = new THREE.Vector3(l.points[0][0], l.points[0][1], l.points[0][2]);
+                lineMoveTo3D(p);
+                for(var j = 1; j < l.points.length; j++){
+                    p = new THREE.Vector3(l.points[j][0], l.points[j][1], l.points[j][2]);
+                    lineLineTo3D(p);
+                }
+            }
         }
 
         //camera
@@ -376,28 +418,6 @@ var app = (function(){
             // scene.add(light);
             break;
         }
-
-        //state variables
-        line3DColor = state.lineColor || line3DColor;
-        line3DThickness = state.lineThickness || line3DThickness;
-
-        //interaction mode
-        switch(state.type){
-            case "poll":
-                setInteractionMode(INTERACTION_MODE.orbit);
-            break;
-            case "label":
-                setInteractionMode(INTERACTION_MODE.orbit);
-            break;
-            case "draw":
-                setInteractionMode(INTERACTION_MODE.draw);
-            break;
-            default:
-                setInteractionMode(INTERACTION_MODE.orbit);
-            break;
-        }
-
-        questionType = state.type;
     }
 
     var _startTime = Date.now();
@@ -460,17 +480,7 @@ var app = (function(){
             var material = new THREE.MeshPhongMaterial({
                 color: color,
                 specular: 0x111111,
-                shininess: 200,
-/*                shading: THREE.SmoothShading,
-                "specular": 8355711,
-                "depthTest": true,
-                "depthWrite": true,
-                "ambient": 9144442,
-                "vertexColors": false,
-                "color": color,
-                "emissive": 263172,
-                "blending": "NormalBlending",
-                "shininess": 50*/
+                shininess: 200
             });
 
             if(geomMode){
@@ -533,9 +543,10 @@ var app = (function(){
         return primary.point;
     }
 
-    function simpleMarker3D(pos3D, color, size, basic){
+    function simpleMarker3D(pos3D, color, size, basic, opacity){
         size = size || 0.15;
         color = color || 0xFF0000;
+        opacity = opacity || 1;
         basic = typeof basic !== 'undefined' ? basic : false;
         //create test pin at point
         var material
@@ -544,6 +555,8 @@ var app = (function(){
         }else{
             material = new THREE.MeshPhongMaterial({color: color});
         }
+        material.transparent = opacity < 1;
+        material.opacity = opacity;
         var pinMesh = new THREE.Mesh(lowResSphereGeom, material);
 
         pinMesh.scale.set(size, size, size);
@@ -562,11 +575,12 @@ var app = (function(){
         }
     }
 
-    function lineMoveTo3D(pos3D, color){
-        color = color || 0x0000FF;
+    function lineMoveTo3D(pos3D){
+        var color = line3DColor || 0x0000FF;
         var thickness = line3DThickness || 0.025;
+        var opacity = line3DOpacity || 1;
 
-        var marker = simpleMarker3D(pos3D, color, thickness, false);
+        var marker = simpleMarker3D(pos3D, color, thickness, false, opacity);
 
         currentLine = [];
         currentLine.push({
@@ -576,9 +590,11 @@ var app = (function(){
         lines.push(currentLine);
     }
 
-    function lineLineTo3D(pos3D, color){
-        color = color || 0x0000FF;
+    function lineLineTo3D(pos3D){
+        var color = line3DColor || 0x0000FF;
         var thickness = line3DThickness || 0.025;
+        var opacity = line3DOpacity || 1;
+
         var segments = 5;
         //draw line from lastPoint in currentLine to pos3D
         if(!currentLine) return;
@@ -590,7 +606,11 @@ var app = (function(){
         //shift center of rotation
         geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, len*.5, 0));
         // var material = new THREE.MeshBasicMaterial({color: color});
-        var material = new THREE.MeshPhongMaterial({color: color});
+        var material = new THREE.MeshPhongMaterial({
+            color: color,
+            transparent: opacity < 1,
+            opacity: opacity
+        });
         line = new THREE.Mesh(geometry, material);
 
         //align with points
@@ -606,13 +626,39 @@ var app = (function(){
         scene.add(line);
 
         //add end marker
-        var marker = simpleMarker3D(pos3D, color, thickness*0.95, false);
+        var marker = simpleMarker3D(pos3D, color, thickness*0.95, false, opacity);
 
         //add line part to current line
         currentLine.push({
             point: pos3D.clone(),
             objects: [line, marker]
         })
+    }
+
+    //@! temporary design
+    function exportLines(){
+        var str = '';
+        for(var i = 0; i < lines.length; i++){
+            var l = lines[i];
+
+            str += '{"color":"#00FF00", "opacity":0.3, "thickness":0.025, "points":[';
+            for(var j = 0; j < l.length; j++){
+                var part = l[j];
+                var p = part.point;
+                str += '['+p.x+','+p.y+','+p.z+']';
+
+                if(j+1 < l.length){
+                    str+=',';
+                }
+            }
+            str += ']}';
+            if(i+1 < lines.length){
+                str+=',\n';
+            }
+        }
+
+
+        return str;
     }
 
     //event handling
@@ -644,7 +690,7 @@ var app = (function(){
             case INTERACTION_MODE.draw:
                 var pos3D = intersect(e.layerX, e.layerY);
                 if(pos3D){
-                    lineMoveTo3D(pos3D, line3DColor);
+                    lineMoveTo3D(pos3D);
                 }
             break;
             case INTERACTION_MODE.annotate:
@@ -666,7 +712,7 @@ var app = (function(){
                 if(mouseDown){
                     var pos3D = intersect(e.layerX, e.layerY);
                     if(pos3D){
-                        lineLineTo3D(pos3D, line3DColor);
+                        lineLineTo3D(pos3D);
                     }
                 }
             break;
@@ -724,10 +770,12 @@ var app = (function(){
         return container.clientHeight;
     }
 
+
     return {
         init: init,
         setState: setState,
-        setInteractionMode: setInteractionMode
+        setInteractionMode: setInteractionMode,
+        exportLines: exportLines
     };
 })();
 
