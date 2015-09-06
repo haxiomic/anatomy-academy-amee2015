@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Anatomy Academy</title>
+	<style type="text/css">
+	img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+	}
+	</style>
+</head>
+<body>
+<img src="images/intro.jpg">
+<script type="text/javascript" src="src/utils.js"></script>
+<script type="text/javascript">
+	var img = document.querySelector('img');
+
+	//select best fit
+	function fit(){	
+		var imgRatio = img.width/img.height;
+		var displayRatio = window.innerWidth/window.innerHeight;
+
+		if(imgRatio < displayRatio){
+			img.style.width='100%';
+			img.style.height='auto';
+		}else{
+			img.style.height='100%';
+			img.style.width='auto';
+		}
+
+		//align center
+		var dx = img.clientWidth - window.innerWidth;
+		img.style.left = -dx*.5+'px';
+		var dy = img.clientHeight - window.innerHeight;
+		img.style.top = -dy*.5+'px';
+	}
+
+	function keyup(e){
+		if(e.keyCode === 189){
+		    window.location.href = 'index.html';
+		}
+	}
+
+	window.addEventListener('resize', fit);
+	document.addEventListener('keyup', keyup);
+	img.onload = fit;
+</script>
+</body>
+</html>
