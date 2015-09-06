@@ -1,0 +1,27 @@
+{
+    "type": "draw",
+    "title": "Highlight the circumflex artery",
+    "info": "It follows the left part of the coronary sulcus, running first to the left and then to the right, reaching nearly as far as the posterior longitudinal sulcus. There have been multiple anomalies described, for example the left circumflex having an aberrant course from the right coronary artery.",
+
+    "models": [
+        {
+            "url": "models/heart/heart-simple.obj",
+            "translation": [0,0,0],
+            "rotation": [0, 0, 0],
+            "scale": 0.1,
+            "color": "#A50E0E"
+        }
+    ],
+
+    "lightingMode": 1,
+
+    "annotations": [],
+
+    "cameraPos": [25, 4, 4],
+    "cameraTarget": [0, 0, 0],
+    "lineColor": "#2D8EF2",
+    "lineThickness": 0.1,
+
+    "next": "draw-trigeminal",
+    "previous": "label-ventricles"
+}

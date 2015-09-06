@@ -21,5 +21,6 @@
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
 
-    "next": "label-ventricles"
+    "next": "label-ventricles",
+    "previous": "highlight-circumflex"
 }

@@ -96,7 +96,7 @@ var uiManager = (function(){
         }
 
         function moveBackward(){
-            window.location.href = '?q='+pq+'&pq='+q+'&state={}';
+            window.location.href = '?q='+(state.previous || pq)+'&pq='+q+'&state={}';
         }
 
         //set back/forward links
@@ -297,25 +297,42 @@ var app = (function(){
             var extension = fileMatched[1];
 
             var loader;
+
+            function defaultLoad(){
+                loader.load(m.url, makeModelHandler(
+                    new THREE.Vector3(m.translation[0], m.translation[1], m.translation[2]),
+                    new THREE.Vector3(m.rotation[0], m.rotation[1], m.rotation[2]),
+                    m.scale,
+                    m.color
+                ));
+            }
+
             switch(extension.toLowerCase()){
                 case 'stl':
                     loader = new THREE.STLLoader();
+                    defaultLoad();
                 break;
                 case 'obj':
-                    loader = new THREE.OBJLoader();
+                    if(m.mtl){
+                        loader = new THREE.OBJMTLLoader(); 
+                        loader.load(m.url, m.mtl, makeModelHandler(
+                            new THREE.Vector3(m.translation[0], m.translation[1], m.translation[2]),
+                            new THREE.Vector3(m.rotation[0], m.rotation[1], m.rotation[2]),
+                            m.scale,
+                            m.color
+                        ));
+                    }else{
+                        loader = new THREE.OBJLoader(); 
+                        defaultLoad();
+                    }
                 break;
                 case 'json':
                     loader = new THREE.ObjectLoader();
+                    defaultLoad()
                 break;
             }
 
-            //load models
-            loader.load(m.url, makeModelHandler(
-                new THREE.Vector3(m.translation[0], m.translation[1], m.translation[2]),
-                new THREE.Vector3(m.rotation[0], m.rotation[1], m.rotation[2]),
-                m.scale,
-                m.color
-            ));
+
         }
 
         //add annotations
@@ -713,7 +730,7 @@ app.init(document.getElementsByClassName('viewer')[0]);
 var questionName = getParameterByName('q').toLowerCase();
 
 if(!questionName){//redirect to default
-    window.location.href = '?q=draw-trigeminal';
+    window.location.href = '?q=highlight-circumflex';
 }
 
 loadJSON('questions/'+questionName+'.json', function(data){

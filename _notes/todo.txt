@@ -7,8 +7,6 @@
 - Teacher composite view
 	- Lines field in question
 
-- More models!
-
 - share button
 
 - Mouse over intesection for draw mode
