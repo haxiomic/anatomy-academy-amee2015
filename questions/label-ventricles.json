@@ -1,7 +1,7 @@
 {
     "type": "label",
     "title": "Label the ventricles",
-    "info": "The structure pictured is a lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "info": "The ventricular system is a set of four interconnected cavities (ventricles) in the brain, where the cerebrospinal fluid (CSF) is produced. Within each ventricle is a region of choroid plexus, a network of ependymal cells involved in the production of CSF.",
     "answers": [
         "Lateral Ventricle",
         "Third Ventricle",
