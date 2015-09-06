@@ -4,21 +4,16 @@
 
 #TODO
 
+- Teacher composite view
+	- Lines field in question
 
-- question json and question pages
-	- multiple models
-
-- question playlist cycling through questions in answer mode
+- More models!
 
 - share button
 
-- put live on github
+- Mouse over intesection for draw mode
 
 - override state variables with url
-
-- back doesn't work correctly
-
-- face nerve question?
 
 - submit, teacher feedback view
 	- graphs?
@@ -28,6 +23,7 @@
 
 
 
+- back doesn't work correctly
 - camera tweening
 - remove jQ and vex
 

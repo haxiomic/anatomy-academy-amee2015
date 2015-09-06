@@ -36,7 +36,7 @@ var uiManager = (function(){
 
     function updatePane(pane){
         var pos2D = worldToScreen(pane.tracker.position);
-        var xOffset = 5;
+        var xOffset = 8;
         pane.el.style.left = pos2D.x - pane.el.clientWidth - xOffset +'px';
         pane.el.style.top = pos2D.y - pane.el.clientHeight*.5+'px';
 
@@ -256,10 +256,10 @@ var app = (function(){
 
         scene.add(gridHelper);
 
-        light = new THREE.DirectionalLight( 0xffffff );
+        //plain white
+        var light = new THREE.DirectionalLight(0xffffff, 1.0);
         light.position.set(1, 1, 1);
         scene.add(light);
-
 
         //add to dom
         container.appendChild(renderer.domElement);
@@ -301,6 +301,9 @@ var app = (function(){
                 case 'stl':
                     loader = new THREE.STLLoader();
                 break;
+                case 'obj':
+                    loader = new THREE.OBJLoader();
+                break;
                 case 'json':
                     loader = new THREE.ObjectLoader();
                 break;
@@ -335,6 +338,21 @@ var app = (function(){
         //camera
         camera.position.set(state.cameraPos[0], state.cameraPos[1], state.cameraPos[2]);
         camera.lookAt(new THREE.Vector3(state.cameraTarget[0], state.cameraTarget[1], state.cameraTarget[2]));
+
+        //lighting
+        switch(state.lightingMode){
+            case 1:
+            //backlight
+            var light = new THREE.DirectionalLight(7838134, 0.5);
+            light.matrix.set([-0.11775875091552734, -0.5954218506813049, 0.7947362661361694, 0, 0.7947362065315247, 0.4233497679233551, 0.43493524193763733, 0, -0.5954217910766602, 0.6828232407569885, 0.42335018515586853, 0, -53.34980010986328, 61.180999755859375, 37.93220138549805, 1]);
+            scene.add(light);
+
+            //filllight
+            // var light = new THREE.DirectionalLight(15062196, 0.55);
+            // light.matrix.set([0.3981269598007202, 0.7758041620254517, -0.48951172828674316, 0, -0.48951178789138794, 0.630973219871521, 0.6018729209899902, 0, 0.7758042812347412, -7.781910937865177e-8, 0.630972683429718, 0, 133.55799865722656, 0, 108.625, 1]);
+            // scene.add(light);
+            break;
+        }
 
         //state variables
         line3DColor = state.lineColor || line3DColor;
@@ -403,8 +421,12 @@ var app = (function(){
         translation = translation || new THREE.Vector3(0);
         rotation = rotation || new THREE.Vector3(0);
         scale = scale || 1;
+
+        var replaceMaterial = !!color;
         color = color || 0xEEEEEE;
+
         return function(obj){
+            
             var mesh;
 
             var objType = obj.type.toLowerCase();
@@ -412,20 +434,37 @@ var app = (function(){
 
             trace('loaded', obj, geomMode);
 
+            var material = new THREE.MeshPhongMaterial({
+                color: color,
+                specular: 0x111111,
+                shininess: 200,
+/*                shading: THREE.SmoothShading,
+                "specular": 8355711,
+                "depthTest": true,
+                "depthWrite": true,
+                "ambient": 9144442,
+                "vertexColors": false,
+                "color": color,
+                "emissive": 263172,
+                "blending": "NormalBlending",
+                "shininess": 50*/
+            });
+
             if(geomMode){
                 //STL-like formats
                 var geometry = obj;
                 mesh = new THREE.Mesh(geometry, material);
-                var material = new THREE.MeshPhongMaterial({
-                    color: color,
-                    specular: 0x111111,
-                    shininess: 200,
-                    shading: THREE.SmoothShading
-                });
 
                 mesh.material = material;
             }else{
                 mesh = obj;
+                if(replaceMaterial){
+                    mesh.material = material;
+                    for(var i = 0; i < mesh.children.length; i++){
+                        var c = mesh.children[i];
+                        c.material = material;
+                    }                    
+                }
             }
 
             var transform;
@@ -446,6 +485,8 @@ var app = (function(){
 
             scene.add(mesh);
             intersectables.push(mesh);
+
+            window.mesh = mesh;//@! debug
         }
     }
 

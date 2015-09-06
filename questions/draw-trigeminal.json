@@ -11,6 +11,8 @@
             "scale": 1.0
         }
     ],
+
+    "lightingMode": 0,
     
     "annotations": [],
 

@@ -10,19 +10,22 @@
 
     "models": [
         {
-            "url": "models/subcortical.stl",
+            "url": "models/subcortical.obj",
             "translation": [0,0,0],
             "rotation": [-1.570796327, 3.14159265359, 0],
             "scale": 0.1,
-            "color": "#FFEAD1"
+            "color": "#FF9595"
         },
         {
-            "url": "models/brain/right.stl",
+            "url": "models/brain/right.obj",
             "translation": [0,0.1,0],
             "rotation": [-1.570796327, 3.14159265359, 0],
-            "scale": 0.16
+            "scale": 0.16,
+            "color": "#FFEAD1"
         }
     ],
+
+    "lightingMode": 1,
 
     "annotations": [
         {
@@ -31,7 +34,7 @@
                 3.6639329958399762,
                 0.835000809293833
             ],
-            "text": "edit me",
+            "text": "click to edit",
             "width": 150,
             "editable": true
         },
@@ -41,7 +44,7 @@
                 4.115193768459968,
                 -2.3933340880774736
             ],
-            "text": "edit me",
+            "text": "click to edit",
             "width": 150,
             "editable": true
         },
@@ -51,7 +54,7 @@
                 0.26247671953208246,
                 -2.297840294665323
             ],
-            "text": "edit me",
+            "text": "click to edit",
             "width": 150,
             "editable": true
         }
@@ -62,5 +65,5 @@
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
 
-    "next": null
+    "next": "test"
 }
