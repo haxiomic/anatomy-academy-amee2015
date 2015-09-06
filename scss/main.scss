@@ -185,6 +185,14 @@ button{
 	left: 0px;
 	right: $side-bar-width;
 	bottom: 0px;
+
+	.quick-tip{
+		position: absolute;
+		padding: $std-box-pad-y*0.5 + $std-box-pad-x*0.5;
+		right: 0px;
+		bottom: 0px;
+		opacity: 0.5;
+	}
 }
 
 
@@ -204,10 +212,14 @@ button{
 	}
 }
 
-
 .sign-up{
 	position: absolute;
-	left: 30px;
+	left: 0px;
 	bottom: 0;
+	margin: 0;
 	width: $side-bar-width;
+	$scale: 0.8;
+	-ms-transform: scale($scale); /* IE 9 */
+   	-webkit-transform: scale($scale); /* Safari */
+    transform: scale($scale);
 }

@@ -127,6 +127,12 @@ button {
   left: 0px;
   right: 380px;
   bottom: 0px; }
+  .viewer .quick-tip {
+    position: absolute;
+    padding: 30px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0.5; }
 
 .uilayer.annotation {
   padding: 10px 15px;
@@ -139,8 +145,14 @@ button {
 
 .sign-up {
   position: absolute;
-  left: 30px;
+  left: 0px;
   bottom: 0;
-  width: 380px; }
+  margin: 0;
+  width: 380px;
+  -ms-transform: scale(0.8);
+  /* IE 9 */
+  -webkit-transform: scale(0.8);
+  /* Safari */
+  transform: scale(0.8); }
 
 /*# sourceMappingURL=main.css.map */
