@@ -74,7 +74,10 @@ button {
       background-color: #2D8EF2;
       color: white;
       font-size: 20px;
-      font-weight: 100; }
+      font-weight: 100;
+      transition: background-color 0.2s ease-in-out; }
+      .side-bar .nav-buttons button:hover {
+        background-color: #5BACFF; }
     .side-bar .nav-buttons button.disabled {
       background-color: #D8DCE1;
       border-color: #CACFD4;
@@ -105,7 +108,10 @@ button {
       background-color: #2D8EF2;
       color: white;
       font-weight: normal;
-      font-size: inherit; }
+      font-size: inherit;
+      transition: background-color 0.2s ease-in-out; }
+      .side-bar .feature-buttons button:hover {
+        background-color: #409EFF; }
   .side-bar .panel.question-panel .icon {
     display: block;
     width: 100%;
@@ -119,7 +125,10 @@ button {
     .side-bar .panel.question-panel .buttons .submit {
       color: white;
       background-color: #5cb85c;
-      border-color: #4cae4c; }
+      border-color: #4cae4c;
+      transition: background-color 0.2s ease-in-out; }
+      .side-bar .panel.question-panel .buttons .submit:hover {
+        background-color: #78D478; }
 
 .viewer {
   position: absolute;

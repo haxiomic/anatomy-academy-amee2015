@@ -4,6 +4,7 @@ $std-box-pad-x: 25px;
 $std-box-pad-y: 35px;
 $std-box-pad: $std-box-pad-y $std-box-pad-x;
 $std-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+$std-transition: 0.2s ease-in-out;
 
 $nav-button-height: 50px;
 
@@ -108,6 +109,12 @@ button{
 			color: white;
 			font-size: 20px;
 			font-weight: 100;
+
+			transition: background-color $std-transition;	
+
+			&:hover{
+				background-color: #5BACFF;
+			}
 		}
 
 		button.disabled{
@@ -145,12 +152,16 @@ button{
 
 		background-color: transparent;
 
-
 		button{
 			background-color: #2D8EF2;
 			color: white;
 			font-weight: normal;
 			font-size: inherit;
+
+			transition: background-color $std-transition;	
+			&:hover{
+				background-color: #409EFF;
+			}
 		}
 	}
 
@@ -170,10 +181,15 @@ button{
 
 		.buttons{
 			text-align: center;
+
 			.submit{
 				color: white;
 				background-color: #5cb85c;
 			    border-color: #4cae4c;
+			    transition: background-color $std-transition;
+			    &:hover{
+			    	background-color: #78D478;
+			    }
 			}
 		}
 	}

@@ -1,9 +1,3 @@
-/* Utils */
-function trace(){console.log.apply(console, arguments);}
-
-
-
-
 var uiManager = (function(){
     var canvas;
     var camera;
@@ -385,8 +379,6 @@ var app = (function(){
                     defaultLoad()
                 break;
             }
-
-
         }
 
         //add annotations
@@ -762,6 +754,12 @@ var app = (function(){
         if(e.altKey === false) altDown = false;
         if(e.ctrlKey === false) ctrlDown = false;
         if(e.metaKey === false) cmdDown = false;
+
+        //@! hack
+        //presentation shortcuts
+        if(e.keyCode === 189){
+            window.location.href = 'final.html';
+        }
     }
 
     function onKeyDown(e){
