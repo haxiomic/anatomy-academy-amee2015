@@ -20,7 +20,7 @@
 - poll questions
 
 
-
+- sidebar y overflow
 - back doesn't work correctly
 - camera tweening
 - remove jQ and vex
