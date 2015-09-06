@@ -51,6 +51,37 @@ button{
 	background-color: #FF0000;
 }
 
+.panel{
+	background-color: white;
+	padding: $std-box-pad;
+	box-shadow: $std-box-shadow;
+	margin-bottom: $std-box-pad-y;
+
+	.title{
+		text-align: left;
+		font-size: 30px;
+		font-weight: normal;
+		margin-bottom: $std-box-pad-y;
+		color: #333;
+	}
+
+	.info{
+		color: #AAA;
+		margin-bottom: $std-box-pad-y;
+	}
+
+	input[type=text]{
+		display: block;
+		border: 1px solid #CCC;
+		padding: $std-box-pad-y*0.5 $std-box-pad-x*0.5;
+		height: 48px;
+		width: 100%;
+		margin-bottom: $std-box-pad-y*0.5;
+		font-size: 20px;
+	}
+
+}
+
 .side-bar{
 	position: absolute;
 	top: $top-bar-height;
@@ -123,13 +154,6 @@ button{
 		}
 	}
 
-	.panel{
-		background-color: white;
-		padding: $std-box-pad;
-		box-shadow: $std-box-shadow;
-		margin-bottom: $std-box-pad-y;
-	}
-
 	.panel.question-panel{
 
 		.icon{
@@ -138,19 +162,6 @@ button{
 			text-align: center;
 			margin-top: $std-box-pad-y*2.0;
 			margin-bottom: $std-box-pad-y * 2.0;
-		}
-
-		.title{
-			text-align: left;
-			font-size: 30px;
-			font-weight: normal;
-			margin-bottom: $std-box-pad-y;
-			color: #333;
-		}
-
-		.info{
-			color: #AAA;
-			margin-bottom: $std-box-pad-y;
 		}
 
 		.answer{
@@ -191,4 +202,12 @@ button{
 			color: rgba(255, 255, 255, 0.25);
 		}
 	}
+}
+
+
+.sign-up{
+	position: absolute;
+	left: 30px;
+	bottom: 0;
+	width: $side-bar-width;
 }

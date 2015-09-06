@@ -29,6 +29,29 @@ button {
   right: 0;
   background-color: #FF0000; }
 
+.panel {
+  background-color: white;
+  padding: 35px 25px;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 35px; }
+  .panel .title {
+    text-align: left;
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 35px;
+    color: #333; }
+  .panel .info {
+    color: #AAA;
+    margin-bottom: 35px; }
+  .panel input[type=text] {
+    display: block;
+    border: 1px solid #CCC;
+    padding: 17.5px 12.5px;
+    height: 48px;
+    width: 100%;
+    margin-bottom: 17.5px;
+    font-size: 20px; }
+
 .side-bar {
   position: absolute;
   top: 0px;
@@ -83,26 +106,12 @@ button {
       color: white;
       font-weight: normal;
       font-size: inherit; }
-  .side-bar .panel {
-    background-color: white;
-    padding: 35px 25px;
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 35px; }
   .side-bar .panel.question-panel .icon {
     display: block;
     width: 100%;
     text-align: center;
     margin-top: 70px;
     margin-bottom: 70px; }
-  .side-bar .panel.question-panel .title {
-    text-align: left;
-    font-size: 30px;
-    font-weight: normal;
-    margin-bottom: 35px;
-    color: #333; }
-  .side-bar .panel.question-panel .info {
-    color: #AAA;
-    margin-bottom: 35px; }
   .side-bar .panel.question-panel .answer {
     margin-bottom: 35px; }
   .side-bar .panel.question-panel .buttons {
@@ -127,5 +136,11 @@ button {
   border: 2px solid rgba(255, 255, 255, 0.75); }
   .uilayer.annotation.placeholder {
     color: rgba(255, 255, 255, 0.25); }
+
+.sign-up {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  width: 380px; }
 
 /*# sourceMappingURL=main.css.map */

@@ -252,7 +252,9 @@ var app = (function(){
         var size = 10;
         var step = 1;
         gridHelper = new THREE.GridHelper(size, step);
-        gridHelper.setColors(0x909090, 0xB0B0B0);
+        gridHelper.setColors(0x505050, 0x909090);
+        gridHelper.material.transparent = true;
+        gridHelper.material.opacity = 0.3;
 
         scene.add(gridHelper);
 

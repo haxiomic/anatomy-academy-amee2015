@@ -17,7 +17,7 @@
 
     "annotations": [],
 
-    "cameraPos": [25, 4, 4],
+    "cameraPos": [15, 4, 4],
     "cameraTarget": [0, 0, 0],
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
