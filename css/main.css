@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+canvas {
+  display: block; }
+
+button {
+  padding: 12px 18px;
+  border-radius: 0;
+  border: none;
+  text-transform: uppercase;
+  background-color: #EFEFEF;
+  color: #666;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  border-width: 2px; }
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  height: 0px;
+  left: 0;
+  right: 0;
+  background-color: #FF0000; }
+
+.side-bar {
+  position: absolute;
+  top: 0px;
+  width: 380px;
+  right: 0;
+  bottom: 0;
+  padding-top: 50px;
+  padding-bottom: 83px;
+  background-color: #f2f2f2;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden; }
+  .side-bar .nav-buttons {
+    position: absolute;
+    display: block;
+    top: 0;
+    width: 100%;
+    height: 50px; }
+    .side-bar .nav-buttons button {
+      height: 100%;
+      background-color: #2D8EF2;
+      color: white;
+      font-size: 20px;
+      font-weight: 100; }
+    .side-bar .nav-buttons button.disabled {
+      background-color: #D8DCE1;
+      border-color: #CACFD4;
+      cursor: default; }
+    .side-bar .nav-buttons .back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      border-right: 2px solid #8CBBEB;
+      border-bottom: 2px solid #58A8F9; }
+    .side-bar .nav-buttons .forward {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      border-bottom: 2px solid #58A8F9; }
+  .side-bar .feature-buttons {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    padding: 17.5px 12.5px;
+    font-size: 15px;
+    text-align: center;
+    background-color: transparent; }
+    .side-bar .feature-buttons button {
+      background-color: #2D8EF2;
+      color: white;
+      font-weight: normal;
+      font-size: inherit; }
+  .side-bar .panel {
+    background-color: white;
+    padding: 35px 25px;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 35px; }
+  .side-bar .panel.question-panel .icon {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 70px; }
+  .side-bar .panel.question-panel .title {
+    text-align: left;
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 35px;
+    color: #333; }
+  .side-bar .panel.question-panel .info {
+    color: #AAA;
+    margin-bottom: 35px; }
+  .side-bar .panel.question-panel .answer {
+    margin-bottom: 35px; }
+  .side-bar .panel.question-panel .buttons {
+    text-align: center; }
+    .side-bar .panel.question-panel .buttons .submit {
+      color: white;
+      background-color: #5cb85c;
+      border-color: #4cae4c; }
+
+.viewer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 380px;
+  bottom: 0px; }
+
+.uilayer.annotation {
+  padding: 10px 15px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.75); }
+  .uilayer.annotation.placeholder {
+    color: rgba(255, 255, 255, 0.25); }
+
+/*# sourceMappingURL=main.css.map */

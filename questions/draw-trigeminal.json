@@ -1,0 +1,23 @@
+{
+    "type": "draw",
+    "title": "Draw the main 3 branches of trigeminal nerve",
+    "info": "The trigeminal nerve (the fifth cranial nerve, or simply CN V) is a nerve responsible for sensation in the face and motor functions such as biting and chewing.",
+
+    "models": [
+        {
+            "url": "models/skull-claraio/skull.json",
+            "translation": [0,0,0],
+            "rotation": [0,3.14159265359,0],
+            "scale": 1.0
+        }
+    ],
+    
+    "annotations": [],
+
+    "cameraPos": [0, 4, 18],
+    "cameraTarget": [0, 0, 0],
+    "lineColor": "#2D8EF2",
+    "lineThickness": 0.1,
+
+    "next": "label-ventricles"
+}

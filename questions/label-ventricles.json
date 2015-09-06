@@ -1,0 +1,66 @@
+{
+    "type": "label",
+    "title": "Label the ventricles",
+    "info": "The structure pictured is a lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    "answers": [
+        "Lateral Ventricle",
+        "Third Ventricle",
+        "Central Canal"
+    ],
+
+    "models": [
+        {
+            "url": "models/subcortical.stl",
+            "translation": [0,0,0],
+            "rotation": [-1.570796327, 3.14159265359, 0],
+            "scale": 0.1,
+            "color": "#FFEAD1"
+        },
+        {
+            "url": "models/brain/right.stl",
+            "translation": [0,0.1,0],
+            "rotation": [-1.570796327, 3.14159265359, 0],
+            "scale": 0.16
+        }
+    ],
+
+    "annotations": [
+        {
+            "point": [
+                3.062464923893146,
+                3.6639329958399762,
+                0.835000809293833
+            ],
+            "text": "edit me",
+            "width": 150,
+            "editable": true
+        },
+        {
+            "point": [
+                1.897976788784232,
+                4.115193768459968,
+                -2.3933340880774736
+            ],
+            "text": "edit me",
+            "width": 150,
+            "editable": true
+        },
+        {
+            "point": [
+                1.0453689207751395,
+                0.26247671953208246,
+                -2.297840294665323
+            ],
+            "text": "edit me",
+            "width": 150,
+            "editable": true
+        }
+    ],
+
+    "cameraPos": [25, 4, 4],
+    "cameraTarget": [0, 0, 0],
+    "lineColor": "#2D8EF2",
+    "lineThickness": 0.1,
+
+    "next": null
+}

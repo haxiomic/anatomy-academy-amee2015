@@ -1,0 +1,194 @@
+$top-bar-height: 0px;
+$side-bar-width: 380px;
+$std-box-pad-x: 25px;
+$std-box-pad-y: 35px;
+$std-box-pad: $std-box-pad-y $std-box-pad-x;
+$std-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+
+$nav-button-height: 50px;
+
+//three.js html ui
+$ui-radius: 6px;
+$ui-pad-x: 15px;
+$ui-pad-y: 10px;
+
+
+
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+canvas{
+	display: block;
+}
+
+button{
+	padding: 12px 18px;
+	border-radius: 0;
+	border: none;
+	text-transform: uppercase;
+	background-color: #EFEFEF;
+	color: #666;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	cursor: pointer;
+	border-width: 2px;
+}
+
+.top-bar{
+	position: absolute;
+	top: 0;
+	height: $top-bar-height;
+	left: 0;
+	right: 0;
+	background-color: #FF0000;
+}
+
+.side-bar{
+	position: absolute;
+	top: $top-bar-height;
+	width: $side-bar-width;
+	right: 0;
+	bottom: 0;
+	padding-top: $nav-button-height;
+	padding-bottom: 83px;//@! needs better calculation
+
+	background-color: rgb(242, 242, 242);
+	box-shadow: $std-box-shadow;		
+	overflow: hidden;
+
+	.nav-buttons{
+		position: absolute;
+		display: block;
+		top: 0;
+		width: 100%;
+		height: $nav-button-height;
+
+		button{
+			height: 100%;
+			background-color: #2D8EF2;
+			color: white;
+			font-size: 20px;
+			font-weight: 100;
+		}
+
+		button.disabled{
+			background-color: #D8DCE1;
+			border-color: #CACFD4;
+			cursor: default;
+		}
+
+		.back{
+			position: absolute;
+			top:0;
+			left:0;
+			width: 50%;
+			border-right: 2px solid #8CBBEB;
+			border-bottom: 2px solid #58A8F9;
+		}
+
+		.forward{
+			position: absolute;
+			top:0;
+			left:50%;
+			width: 50%;
+			border-bottom: 2px solid #58A8F9;
+		}
+	}
+
+	.feature-buttons{
+		position: absolute;
+		display: block;
+		bottom: 0;
+		width: 100%;
+		padding: $std-box-pad-y*.5 $std-box-pad-x*.5;
+		font-size: 15px;
+		text-align: center;
+
+		background-color: transparent;
+
+
+		button{
+			background-color: #2D8EF2;
+			color: white;
+			font-weight: normal;
+			font-size: inherit;
+		}
+	}
+
+	.panel{
+		background-color: white;
+		padding: $std-box-pad;
+		box-shadow: $std-box-shadow;
+		margin-bottom: $std-box-pad-y;
+	}
+
+	.panel.question-panel{
+
+		.icon{
+			display: block;
+			width: 100%;
+			text-align: center;
+			margin-top: $std-box-pad-y*2.0;
+			margin-bottom: $std-box-pad-y * 2.0;
+		}
+
+		.title{
+			text-align: left;
+			font-size: 30px;
+			font-weight: normal;
+			margin-bottom: $std-box-pad-y;
+			color: #333;
+		}
+
+		.info{
+			color: #AAA;
+			margin-bottom: $std-box-pad-y;
+		}
+
+		.answer{
+			margin-bottom: $std-box-pad-y;
+		}
+
+		.buttons{
+			text-align: center;
+			.submit{
+				color: white;
+				background-color: #5cb85c;
+			    border-color: #4cae4c;
+			}
+		}
+	}
+}
+
+.viewer{
+	position: absolute;
+	top: $top-bar-height;
+	left: 0px;
+	right: $side-bar-width;
+	bottom: 0px;
+}
+
+
+.uilayer{
+	&.annotation{
+		padding: $ui-pad-y $ui-pad-x;
+		border-radius: $ui-radius;
+		
+		background-color: rgba(0,0,0,.9);
+		color: white;
+		border: 2px solid rgba(255,255,255,.75);
+
+		// background-color: rgba(255,255,255,.8);
+		&.placeholder{
+			color: rgba(255, 255, 255, 0.25);
+		}
+	}
+}

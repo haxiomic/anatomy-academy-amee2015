@@ -1,9 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Anatomy Academy</title>
+	<!-- vex -->
+	<link rel="stylesheet" href="lib/vex/css/vex.css" />
+	<link rel="stylesheet" href="lib/vex/css/vex-theme-os.css" />
+
+	<!-- app -->
+	<link rel="stylesheet" type="text/css" href="css/fonts.css">
+	<link rel="stylesheet" type="text/css" href="fonts/icomoon/style.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-hello world
+
+	<div class="top-bar">
+	</div>
+	<div class="viewer">
+	</div>
+	<div class="side-bar">
+		<div class="nav-buttons">
+			<button class="back"><span class="icon-arrow-left-larger"></span>&nbsp; Back</button>
+			<button class="forward">Forward &nbsp;<span class="icon-arrow-right-larger"></span></button>
+		</div>
+		<div class="feature-buttons">
+			<button>Print 3D Model</button>
+		</div>
+		<div class="panel question-panel">
+			<div class="title"></div>
+			<div class="info"></div>
+			<div class="icon"><img></div>
+			<div class="answer"></div>
+			<div class="buttons">
+				<button class="submit">Send Answer</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- lib -->
+	<!-- jquery -->
+	<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+	<!-- three -->
+	<script type="text/javascript" src="lib/three/three.min.js"></script>
+	<script type="text/javascript" src="lib/three/controls/OrbitControls.js"></script>
+	<script type="text/javascript" src="lib/three/extras/renderers/Projector.js"></script>
+	<script type="text/javascript" src="lib/three/extras/loaders/STLLoader.js"></script>
+	<script type="text/javascript" src="lib/three/extras/loaders/OBJLoader.js"></script>
+	<script type="text/javascript" src="lib/three/extras/loaders/MTLLoader.js"></script>
+	<script type="text/javascript" src="lib/three/extras/loaders/BabylonLoader.js"></script>
+	<!-- vex -->
+	<script src="lib/vex/js/vex.combined.min.js"></script>
+	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
+
+	<!-- app -->
+	<script type="text/javascript" src="src/utils.js"></script>
+	<script type="text/javascript" src="src/main.js"></script>
+
 </body>
 </html>

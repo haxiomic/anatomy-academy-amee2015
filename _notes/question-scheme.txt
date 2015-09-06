@@ -1,0 +1,33 @@
+question
+	type:String
+	title:String
+	info:String
+
+	models:[{
+		url:String,
+		translation:Vec3
+		rotation:Vec3
+		scale:Float
+	}]
+
+	cameraPos:Vec3
+	cameraTarget:Vec3
+	annotations:[
+		{
+			text:String
+			point:Vec3
+		}
+	]
+
+	//specifics
+	Draw:{
+		* empty *
+	}
+	MultipleChoice:{
+		[options]
+	}
+	Text:{
+		placeholder
+	}
+
+

@@ -1,0 +1,34 @@
+* drawing on the skull for prep surgery
+* inside brain for polls
+ 
+
+#TODO
+
+
+- question json and question pages
+	- multiple models
+
+- question playlist cycling through questions in answer mode
+
+- share button
+
+- put live on github
+
+- override state variables with url
+
+- back doesn't work correctly
+
+- face nerve question?
+
+- submit, teacher feedback view
+	- graphs?
+	- composited drawings
+
+- poll questions
+
+
+
+- camera tweening
+- remove jQ and vex
+
+Do it live where possible
