@@ -21,6 +21,8 @@
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
 
+    "submitTo": "composite",
+
     "next": "label-ventricles",
     "previous": "highlight-circumflex"
 }

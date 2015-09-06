@@ -111,18 +111,22 @@ var uiManager = (function(){
         var pq = getParameterByName('pq');
 
         function moveForward(){
-            window.location.href = '?q='+state.next+'&pq='+q+'&state={}';
+            moveTo(state.next);
         }
 
         function moveBackward(){
             window.location.href = '?q='+(state.previous || pq)+'&pq='+q+'&state={}';
         }
 
+        function moveTo(question){
+            window.location.href = '?q='+question+'&pq='+q+'&state={}';
+        }
+
         //set back/forward links
         var backEl = document.querySelector('.side-bar button.back');
         var forwardEl = document.querySelector('.side-bar button.forward');
 
-        if(pq){
+        if(state.previous || pq){
             backEl.addEventListener('click', moveBackward);            
         }else{
             backEl.classList.add('disabled');
@@ -142,7 +146,9 @@ var uiManager = (function(){
             sendEl.style.display = '';
             //send answer button click
             if(state.next){
-                sendEl.addEventListener('click', moveForward);
+                sendEl.addEventListener('click', function(){
+                    moveTo(state.submitTo || state.next);
+                });
             }
         }
 
@@ -152,18 +158,19 @@ var uiManager = (function(){
         questionEl.querySelector('.title').innerHTML = state.title;
         questionEl.querySelector('.info').innerHTML = state.info;
 
-        questionEl.querySelector('.icon img').style.display = '';
+        questionEl.querySelector('.icon').style.display = 'none';
         switch(state.type){
             case "poll":
             break;
             case "draw":
                 questionEl.querySelector('.icon img').src = 'images/drawicon.png';
+                questionEl.querySelector('.icon').style.display = '';
             break;
             case "label":
                 questionEl.querySelector('.icon img').src = 'images/labelicon.png';
+                questionEl.querySelector('.icon').style.display = '';
             break;
             default:
-                questionEl.querySelector('.icon img').style.display = 'none';
             break;
         }
     }

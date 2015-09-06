@@ -59,7 +59,7 @@
     ],
 
     "cameraPos": [10, 4, 4],
-    "cameraTarget": [0, 0, 0],
+    "cameraTarget": [0, 2.5, 0],
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
 
