@@ -42,8 +42,22 @@ var uiManager = (function(){
     function updatePane(pane){
         var pos2D = worldToScreen(pane.tracker.position);
         var xOffset = 8;
-        pane.el.style.left = pos2D.x - pane.el.clientWidth - xOffset +'px';
-        pane.el.style.top = pos2D.y - pane.el.clientHeight*.5+'px';
+
+        var side = 'left';
+        if(getParameterByName('q').toLowerCase().trim() === 'composite'){//@!diiiiiirty hack
+            side = 'right';
+        }
+
+        switch (side.toLowerCase()){
+            case 'left':
+                pane.el.style.left = pos2D.x - pane.el.clientWidth - xOffset +'px';
+                pane.el.style.top = pos2D.y - pane.el.clientHeight*.5+'px';
+            break;
+            case 'right':
+                pane.el.style.left = pos2D.x +'px';
+                pane.el.style.top = pos2D.y - pane.el.clientHeight*.5+'px';
+            break;
+        }
 
         //rough depth ordering with z-index and camera
         //janky but works
@@ -120,10 +134,16 @@ var uiManager = (function(){
             forwardEl.classList.add('disabled');
         }
 
-        //send answer button
+        //answer button
         var sendEl = document.querySelector('.side-bar button.submit');
-        if(state.next){
-            sendEl.addEventListener('click', moveForward);
+        if(state.type.match('answers')){
+            sendEl.style.display = 'none';
+        }else{
+            sendEl.style.display = '';
+            //send answer button click
+            if(state.next){
+                sendEl.addEventListener('click', moveForward);
+            }
         }
 
         //fill question elements
@@ -382,21 +402,27 @@ var app = (function(){
         }
 
         //add lines
+
+        //cycle color with each line, @! hack
+        var cLineColor = new Color('#FF0000');
         if(state.lines){//array of arrays of Vec3
             for(var i = 0; i < state.lines.length; i++){
                 var l = state.lines[i];
                 //iterate line points
                 if(!l.points[0]) continue;
-                line3DColor = l.color;
-                line3DOpacity = l.opacity;
+                line3DColor = cLineColor.toCSSHex();
+                line3DOpacity = 0.7;//l.opacity; //@! hack
                 line3DThickness = 0.03;//l.thickness;//@! hack
                 var p;
-                p = new THREE.Vector3(l.points[0][0], l.points[0][1], l.points[0][2]);
+                p = new THREE.Vector3(-l.points[0][0], l.points[0][1], l.points[0][2]);//@! hack: flipped on x
                 lineMoveTo3D(p);
                 for(var j = 1; j < l.points.length; j++){
-                    p = new THREE.Vector3(l.points[j][0], l.points[j][1], l.points[j][2]);
+                    p = new THREE.Vector3(-l.points[j][0], l.points[j][1], l.points[j][2]);//@! hack: flipped on x
                     lineLineTo3D(p);
                 }
+
+                //cycle line color @! hack
+                cLineColor = cLineColor.shiftHue(30);
             }
         }
 

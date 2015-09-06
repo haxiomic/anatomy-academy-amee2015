@@ -1,7 +1,7 @@
 {
     "type": "answers-composite",
-    "title": "Composite",
-    "info": "...",
+    "title": "Student Answers",
+    "info": "<div><b>Question</b></div><div><i>\"Draw the main 3 branches of trigeminal nerve\"</i></div><div style=\"margin-top:20px\"><b>74%</b> answered correctly<br><b>26%</b> answered incorrectly</div>",
 
     "models": [
         {
@@ -17,7 +17,7 @@
     "annotations": [
         {
             "point": [
-                -3.062464923893146,
+                3.062464923893146,
                 3.6639329958399762,
                 -0.835000809293833
             ],
@@ -58,7 +58,7 @@
 
     ],
 
-    "cameraPos": [-10, 4, 4],
+    "cameraPos": [10, 4, 4],
     "cameraTarget": [0, 0, 0],
     "lineColor": "#2D8EF2",
     "lineThickness": 0.1,
